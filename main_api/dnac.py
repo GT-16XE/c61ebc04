@@ -22,14 +22,19 @@ if __name__ == '__main__':
     # target device
     dnac = DNAC(CONFIG['dnac'])
 
+    # setup proxy
+    dnac.setup_proxy()
+
     list_network_devices = dnac.get_url('network-device')['response']
 
     print(
-        "{0:42}{1:17}{2:12}{3:18}{4:12}{5:16}{6:15}".format("hostname", "mgmt IP", "serial", "platformId", "SW Version",
-                                                            "role", "Uptime"))
+        "{0:42}{1:17}{2:12}{3:18}{4:12}{5:16}{6:24}{7:40}".format("hostname", "mgmt IP", "serial", "platformId", "SW Version",
+                                                            "role", "Uptime", 'ID'))
 
     for device in list_network_devices:
         uptime = "N/A" if device['upTime'] is None else device['upTime']
-        print("{0:42}{1:17}{2:12}{3:18}{4:12}{5:16}{6:15}".format(device['hostname'], device['managementIpAddress'],
+        print("{0:42}{1:17}{2:12}{3:18}{4:12}{5:16}{6:24}{7:40}".format(device['hostname'], device['managementIpAddress'],
                                                                   device['serialNumber'], device['platformId'],
-                                                                  device['softwareVersion'], device['role'], uptime))
+                                                                  device['softwareVersion'], device['role'], uptime, device['id']))
+
+    print(dnac.get_url('network-health'))

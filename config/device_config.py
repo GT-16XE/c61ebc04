@@ -8,7 +8,18 @@ CONFIG = {
         'host': 'sandboxdnac.cisco.com',
         'port': 443,
         'username': 'devnetuser',
-        'password': 'Cisco123!'
+        'password': 'Cisco123!',
+        'proxy': {
+            'proxy_settings': {
+                'httpProxyHost': '',
+                'httpsProxyHost': '',
+                'httpProxyPort': '',
+                'httpsProxyPort': '',
+                'httpNonProxyHosts': '',
+            },
+            'username': '',
+            'password': ''
+        }
     },
     'nx9kv_1': {
         'protocol': 'https',
